@@ -115,6 +115,9 @@ def plot_bar_nombre_achats(df):
 
     dfg = df.groupby(["Product line", "Customer type"])["Invoice ID"].nunique().reset_index()
 
+    #  TRI EN ORDRE CROISSANT 
+    dfg = dfg.sort_values("Invoice ID", ascending=True)
+
     fig = px.bar(
         dfg,
         y="Product line",
@@ -130,14 +133,26 @@ def plot_bar_nombre_achats(df):
     )
 
     fig.update_layout(
-        autosize=True,      
-        bargap=0.15,
-        bargroupgap=0.05,
+        autosize=True,                     # utilise toute la largeur disponible
+        margin=dict(l=5, r=5, t=50, b=10), # marges MINIMALES pour élargir le graphe
+        yaxis=dict(tickfont=dict(size=8)), # labels plus petits → barres plus longues
+        bargap=0.10,
+        bargroupgap=0.02,
+
+        # 🔥 LÉGENDE RÉDUITE AU MAXIMUM
+        legend=dict(
+            font=dict(size=8),             
+            orientation="v",               # verticale 
+            x=1.02,                        # collée à droite
+            y=1,
+            bgcolor="rgba(0,0,0,0)"        # fond transparent
+        ),
+
+        #  THÈME
         paper_bgcolor="#2C3E50",
         plot_bgcolor="#ffffff",
         font=dict(color="#f7f7f7"),
-        title_font=dict(size=20, color="#f7f7f7"),
-        margin=dict(l=20, r=20, t=60, b=20)
+        title_font=dict(size=18, color="#f7f7f7"),
     )
 
     fig.update_traces(marker=dict(line=dict(width=1, color="#2C3E50")))
