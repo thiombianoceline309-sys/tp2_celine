@@ -139,7 +139,7 @@ def plot_bar_nombre_achats(df):
         bargap=0.10,
         bargroupgap=0.02,
 
-        # 🔥 LÉGENDE RÉDUITE AU MAXIMUM
+        
         legend=dict(
             font=dict(size=8),             
             orientation="v",               # verticale 
@@ -206,17 +206,13 @@ def graph_evolution_hebdo(df):
     df = df.copy()
     df["Date"] = pd.to_datetime(df["Date"])
 
-    # Palette premium pour les villes
     color_map = {
         "Yangon": "#2D92C1",
         "Mandalay": "#E13D37",
         "Naypyitaw": "#1D6C21"
     }
 
-    # Début de semaine (lundi)
     df["WeekStart"] = df["Date"] - pd.to_timedelta(df["Date"].dt.weekday, unit="D")
-
-    # Agrégation hebdomadaire
     dfg = df.groupby(["WeekStart", "City"])["Total"].sum().reset_index()
 
     fig = px.line(
@@ -224,7 +220,7 @@ def graph_evolution_hebdo(df):
         x="WeekStart",
         y="Total",
         color="City",
-        title="Évolution hebdomadaire du montant total des achats par ville",
+        title="Évolution hebdomadaire des achats par ville",
         labels={
             "WeekStart": "Semaine",
             "Total": "Montant total des achats",
@@ -233,20 +229,27 @@ def graph_evolution_hebdo(df):
         color_discrete_map=color_map
     )
 
-    # Ticks mensuels, données hebdomadaires
     fig.update_xaxes(
-        dtick="M1",          # 1 tick par mois
-        tickformat="%b %Y"   # ex : Mar 2019
+        dtick="M1",
+        tickformat="%b %Y"
     )
 
     fig.update_layout(
+        autosize=True,
+        margin=dict(l=10, r=10, t=50, b=20),
+        legend=dict(
+            font=dict(size=8),
+            orientation="v",
+            x=1.02,
+            y=1,
+            bgcolor="rgba(0,0,0,0)"
+        ),
         paper_bgcolor="#2C3E50",
         plot_bgcolor="#e6e6e6",
-        title_font=dict(size=20, color="#f7f7f7"),
+        title_font=dict(size=18, color="#f7f7f7"),
         font=dict(color="#f7f7f7"),
         xaxis_title="semaine",
-        yaxis_title="Montant total des achats",
-        margin=dict(l=20, r=20, t=60, b=20)
+        yaxis_title="Montant total des achats"
     )
 
     fig.update_traces(line=dict(width=3))
