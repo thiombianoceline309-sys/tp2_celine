@@ -266,7 +266,7 @@ TEXT = "#f7f7f7"
 
 app = dash.Dash(__name__, external_stylesheets=[dbc.themes.FLATLY])
 
-app.server
+server = app.server
 
 app.layout = dbc.Container(
     style={
