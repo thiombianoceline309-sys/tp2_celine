@@ -112,10 +112,6 @@ barplot_nombre_achats_par_sexe(df)
 
 # %%
 def plot_bar_nombre_achats(df):
-    """
-    Diagramme en barres du nombre total d'achats
-    par catégorie de produit ET par Customer Type.
-    """
 
     dfg = df.groupby(["Product line", "Customer type"])["Invoice ID"].nunique().reset_index()
 
@@ -132,15 +128,18 @@ def plot_bar_nombre_achats(df):
             'Customer type': 'Type de client'
         }
     )
+
     fig.update_layout(
-        paper_bgcolor="#2C3E50",   
-        plot_bgcolor="#ffffff",    
-        font=dict(color="#f7f7f7"),  # Texte blanc pour contraster avec le fond foncé
+        autosize=True,      
+        bargap=0.15,
+        bargroupgap=0.05,
+        paper_bgcolor="#2C3E50",
+        plot_bgcolor="#ffffff",
+        font=dict(color="#f7f7f7"),
         title_font=dict(size=20, color="#f7f7f7"),
         margin=dict(l=20, r=20, t=60, b=20)
     )
 
-    # Couleurs plus modernes pour les barres
     fig.update_traces(marker=dict(line=dict(width=1, color="#2C3E50")))
 
     return fig
