@@ -1,0 +1,26 @@
+/* Empêche les colonnes de s'écraser */
+.row {
+    flex-wrap: nowrap;
+}
+
+/* Permet aux colonnes de garder leur largeur */
+.col, .col-3, .col-4, .col-5, .col-7, .col-9 {
+    min-width: 0;
+}
+
+/* Empêche les graphes Plotly de déborder */
+.js-plotly-plot {
+    width: 100% !important;
+    height: 100% !important;
+}
+
+/* Stabilise les conteneurs de graphes */
+.graph-container {
+    height: 100%;
+    display: flex;
+    flex-direction: column;
+}
+
+.graph-container > div {
+    flex-grow: 1;
+}

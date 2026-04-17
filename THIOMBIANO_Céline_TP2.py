@@ -98,8 +98,6 @@ def histogramme_repartition_montants(df):
 histogramme_repartition_montants(df)
 
 
-
-
 # %% [markdown]
 # ### 2. Diagramme en barres du nombre total d'achats par sexe et par ville.
 # %%
@@ -252,11 +250,11 @@ graph_evolution_hebdo(df).show()
 # %% [markdown]
 # ## Etape 5 : Création du dashboard avec Dash
 
-# %%
 import dash
 from dash import html, dcc
 import dash_bootstrap_components as dbc
 from dash.dependencies import Input, Output, State
+
 
 # Palette de couleurs
 PRIMARY = "#1f77b4"
@@ -265,8 +263,8 @@ BG = "#2C3E50"
 TEXT = "#f7f7f7"
 
 app = dash.Dash(__name__, external_stylesheets=[dbc.themes.FLATLY])
-
 server = app.server
+
 
 app.layout = dbc.Container(
     style={
@@ -282,7 +280,6 @@ app.layout = dbc.Container(
             dbc.Col(
                 [
 
-                    # ----- Icône "?" sans compartiment -----
                     html.Button(
                         "?",
                         id="help_icon",
@@ -298,7 +295,6 @@ app.layout = dbc.Container(
                         }
                     ),
 
-                    # ----- Tooltip au survol -----
                     dbc.Tooltip(
                         "Tableau de bord réalisé par Céline THIOMBIANO, dans le cadre du cours Python Avancé "
                         "enseigné par le Dr Abdoul Razac SANE, Master Économétrie Appliquée - "
@@ -308,7 +304,6 @@ app.layout = dbc.Container(
                         style={"font-size": "14px"}
                     ),
 
-                    # ================== C1 - L1 ==================
                     html.Div(
                         [
                             html.Img(
@@ -329,7 +324,6 @@ app.layout = dbc.Container(
                         }
                     ),
 
-                    # ================== C1 - L2 ==================
                     html.Div(
                         [
                             html.Label("Sélectionner le genre", style={"font-weight": "bold", "color": "white"}),
@@ -351,7 +345,6 @@ app.layout = dbc.Container(
                         }
                     ),
 
-                    # ================== C1 - L3 ==================
                     html.Div(
                         [
                             html.Label("Sélectionner la ville", style={"font-weight": "bold", "color": "white"}),
@@ -385,11 +378,9 @@ app.layout = dbc.Container(
             dbc.Col(
                 [
 
-                    # ================== C2 - L1 ==================
                     dbc.Row(
                         [
 
-                            # ----- KPI 1 -----
                             dbc.Col(
                                 html.Div(
                                     [
@@ -408,7 +399,6 @@ app.layout = dbc.Container(
                                 style={"padding": "10px"}
                             ),
 
-                            # ----- KPI 2 -----
                             dbc.Col(
                                 html.Div(
                                     [
@@ -427,11 +417,10 @@ app.layout = dbc.Container(
                                 style={"padding": "10px"}
                             ),
 
-                            # ----- KPI 3 -----
                             dbc.Col(
                                 html.Div(
                                     [
-                                        html.H5("Evaluation moyenne client", style={"font-weight": "bold", "color": PRIMARY}),
+                                        html.H5("Evaluation moyenne ", style={"font-weight": "bold", "color": PRIMARY}),
                                         html.Div(id="kpi_avg", style={"font-size": "26px", "margin-top": "10px", "color": "#000"})
                                     ],
                                     style={
@@ -450,15 +439,12 @@ app.layout = dbc.Container(
                         style={"margin": "0"}
                     ),
 
-                    # ================== C2 - L2 ==================
                     dbc.Row(
                         [
 
-                            # ----- C2 - L2 - Col1 -----
                             dbc.Col(
                                 [
 
-                                    # Ligne 1 → Evolution hebdo
                                     html.Div(
                                         [
                                             dcc.Graph(id="evolution_chart", style={"height": "100%"})
@@ -472,7 +458,6 @@ app.layout = dbc.Container(
                                         }
                                     ),
 
-                                    # Ligne 2 → Pie chart
                                     html.Div(
                                         [
                                             dcc.Graph(id="pie_chart", style={"height": "100%"})
@@ -492,7 +477,6 @@ app.layout = dbc.Container(
                                 style={"padding": "10px", "height": "700px"}
                             ),
 
-                            # ----- C2 - L2 - Col2 -----
                             dbc.Col(
                                 html.Div(
                                     [
@@ -528,9 +512,6 @@ app.layout = dbc.Container(
     fluid=True
 )
 
-# ============================================================
-#  CALLBACK PRINCIPAL
-# ============================================================
 
 @app.callback(
     [
@@ -568,6 +549,7 @@ def update_dashboard(gender, city):
 
 if __name__ == "__main__":
     app.run(debug=True)
+
 
 
 
