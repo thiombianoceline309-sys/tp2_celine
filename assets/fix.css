@@ -1,14 +1,15 @@
-/* Empêche les colonnes de s'écraser */
+/* Empêche Bootstrap de compresser les colonnes */
 .row {
-    flex-wrap: nowrap;
+    flex-wrap: nowrap !important;
 }
 
-/* Permet aux colonnes de garder leur largeur */
+/* Permet aux colonnes de garder leur largeur normale */
 .col, .col-3, .col-4, .col-5, .col-7, .col-9 {
-    min-width: 0;
+    min-width: 0 !important;
+    flex: 1 1 auto !important;
 }
 
-/* Empêche les graphes Plotly de déborder */
+/* Empêche les graphes Plotly de se réduire */
 .js-plotly-plot {
     width: 100% !important;
     height: 100% !important;
@@ -23,4 +24,11 @@
 
 .graph-container > div {
     flex-grow: 1;
+}
+
+/* Empêche les images (comme ton logo) d'être coupées */
+img {
+    max-width: 100%;
+    height: auto;
+    object-fit: contain;
 }
