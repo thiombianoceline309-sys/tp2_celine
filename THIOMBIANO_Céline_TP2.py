@@ -86,7 +86,7 @@ print(f"L'évaluation moyenne est de : {evaluation_moyenne}")
 # ## Etapes 4 : Graphiques
 
 # %% [markdown]
-# ### 1. Histogramme donnant la répartition des montants totaux des achat
+# ### 1. Histogramme donnant la répartition des montants totaux des achats
 
 # %%
 # Fonction Histogramme donnant la répartition des montants totaux des achats par sexe et par ville.
@@ -133,19 +133,19 @@ def plot_bar_nombre_achats(df):
     )
 
     fig.update_layout(
-        autosize=True,                     # utilise toute la largeur disponible
-        margin=dict(l=5, r=5, t=50, b=10), # marges MINIMALES pour élargir le graphe
-        yaxis=dict(tickfont=dict(size=8)), # labels plus petits → barres plus longues
+        autosize=True,                     
+        margin=dict(l=5, r=5, t=50, b=10), 
+        yaxis=dict(tickfont=dict(size=8)), 
         bargap=0.10,
         bargroupgap=0.02,
 
         
         legend=dict(
             font=dict(size=8),             
-            orientation="v",               # verticale 
-            x=1.02,                        # collée à droite
+            orientation="v",               
+            x=1.02,                        
             y=1,
-            bgcolor="rgba(0,0,0,0)"        # fond transparent
+            bgcolor="rgba(0,0,0,0)"        
         ),
 
         #  THÈME
@@ -168,7 +168,7 @@ plot_bar_nombre_achats(df).show()
 # %%
 def plot_pie_product_line(df):
 
-    # Palette premium adaptée au fond foncé
+    # Palette 
     color_map = {
         "Fashion accessories": "#4FC3F7",
         "Food and beverages": "#FFB74D",
@@ -259,7 +259,7 @@ graph_evolution_hebdo(df).show()
 
 
 # %% [markdown]
-# Les branches ici reprensentent aussi les villes
+
 
 # %% [markdown]
 # # Création du dashbord
@@ -319,7 +319,7 @@ app.layout = dbc.Container(
                         style={"font-size": "14px"}
                     ),
 
-                    # ⭐ BLOC LOGO — FOND ÉCLAIRCI
+                    
                     html.Div(
                         [
                             html.Img(
