@@ -114,14 +114,12 @@ barplot_nombre_achats_par_sexe(df)
 def plot_bar_nombre_achats(df):
 
     dfg = df.groupby(["Product line", "Customer type"])["Invoice ID"].nunique().reset_index()
-
-    #  TRI EN ORDRE CROISSANT 
     dfg = dfg.sort_values("Invoice ID", ascending=True)
 
     fig = px.bar(
         dfg,
-        x="Product line",
-        y="Invoice ID",
+        y="Product line",
+        x="Invoice ID",
         color="Customer type",
         barmode="group",
         title="Nombre total d'achats",
@@ -133,22 +131,31 @@ def plot_bar_nombre_achats(df):
     )
 
     fig.update_layout(
-        autosize=True,                     
-        margin=dict(l=5, r=5, t=50, b=10), 
-        yaxis=dict(tickfont=dict(size=8)), 
+        autosize=True,
+
+        # ↑ marge haute suffisante pour titre + légende
+        margin=dict(l=5, r=5, t=95, b=10),
+
+        yaxis=dict(tickfont=dict(size=8)),
         bargap=0.10,
         bargroupgap=0.02,
 
-        
+        # ⭐ TITRE LÉGÈREMENT À GAUCHE (pas centré)
+        title_x=0.25,
+
+        # ⭐ LÉGENDE À DROITE, bien séparée du graphe
         legend=dict(
-            font=dict(size=8),             
-            orientation="v",               
-            x=1.02,                        
-            y=1,
-            bgcolor="rgba(0,0,0,0)"        
+            orientation="h",
+            yanchor="top",
+            y=1.07,          # ← juste sous le titre, mais plus haut qu’avant
+            xanchor="right",
+            x=1.0,           # ← alignée à droite
+            font=dict(size=9),
+            bgcolor="rgba(0,0,0,0)",
+            itemwidth=60
         ),
 
-        #  THÈME
+        # Thème
         paper_bgcolor="#2C3E50",
         plot_bgcolor="#ffffff",
         font=dict(color="#f7f7f7"),
@@ -160,7 +167,6 @@ def plot_bar_nombre_achats(df):
     return fig
 plot_bar_nombre_achats(df).show()
 
-
 # %% [markdown]
 # ### 3. Diagramme circulaire montrant la répartition de la catégorie de produit (Product line)
 #  
@@ -168,7 +174,7 @@ plot_bar_nombre_achats(df).show()
 # %%
 def plot_pie_product_line(df):
 
-    # Palette 
+    # Palette premium adaptée au fond foncé
     color_map = {
         "Fashion accessories": "#4FC3F7",
         "Food and beverages": "#FFB74D",
@@ -191,7 +197,8 @@ def plot_pie_product_line(df):
         plot_bgcolor="#ffffff",
         title_font=dict(size=20, color="#f7f7f7"),
         font=dict(color="#f7f7f7"),
-        margin=dict(l=20, r=20, t=60, b=20)
+        margin=dict(l=20, r=20, t=60, b=20),
+        title_x=0.5
     )
 
     return fig
@@ -236,14 +243,24 @@ def graph_evolution_hebdo(df):
 
     fig.update_layout(
         autosize=True,
-        margin=dict(l=10, r=10, t=50, b=20),
+        width=None,              # ⭐ autorise l’extension horizontale
+        margin=dict(l=0, r=0, t=105, b=20),
+
+        # ⭐ titre légèrement à gauche
+        title_x=0.25,
+
+        # ⭐ légende à droite, propre
         legend=dict(
-            font=dict(size=8),
-            orientation="v",
-            x=1.02,
-            y=1,
-            bgcolor="rgba(0,0,0,0)"
+            orientation="h",
+            yanchor="top",
+            y=1.15,
+            xanchor="right",
+            x=1.0,
+            font=dict(size=9),
+            bgcolor="rgba(0,0,0,0)",
+            itemwidth=60
         ),
+
         paper_bgcolor="#2C3E50",
         plot_bgcolor="#e6e6e6",
         title_font=dict(size=18, color="#f7f7f7"),
@@ -319,6 +336,7 @@ app.layout = dbc.Container(
                         style={"font-size": "14px"}
                     ),
 
+                    
                     html.Div(
                         [
                             html.Img(
@@ -333,7 +351,7 @@ app.layout = dbc.Container(
                         ],
                         style={
                             "padding": "20px",
-                            "backgroundColor": "#C5DAEF",
+                            "backgroundColor": "#C5DAEF",   
                             "border-radius": "8px",
                             "box-shadow": "0 2px 6px rgba(0,0,0,0.2)"
                         }
@@ -393,7 +411,6 @@ app.layout = dbc.Container(
             dbc.Col(
                 [
 
-                    # ---------- LIGNE 1 : KPI ----------
                     dbc.Row(
                         [
 
@@ -455,68 +472,62 @@ app.layout = dbc.Container(
                         style={"margin": "0"}
                     ),
 
-                    # ---------- LIGNE 2 : EVOLUTION + PIE ----------
                     dbc.Row(
                         [
 
-                            # Évolution hebdo à gauche
                             dbc.Col(
-                                html.Div(
-                                    [
-                                        dcc.Graph(id="evolution_chart", style={"height": "100%"})
-                                    ],
-                                    style={
-                                        "padding": "10px",
-                                        "height": "350px",
-                                        "backgroundColor": "white",
-                                        "border-radius": "8px",
-                                        "box-shadow": "0 2px 6px rgba(0,0,0,0.1)"
-                                    }
-                                ),
-                                width=6,
-                                style={"padding": "10px"}
+                                [
+
+                                    html.Div(
+                                        [
+                                            dcc.Graph(id="evolution_chart", style={"height": "100%"})
+                                        ],
+                                        style={
+                                            "padding": "10px",
+                                            "height": "50%",
+                                            "backgroundColor": "white",
+                                            "border-radius": "8px",
+                                            "box-shadow": "0 2px 6px rgba(0,0,0,0.1)"
+                                        }
+                                    ),
+
+                                    html.Div(
+                                        [
+                                            dcc.Graph(id="pie_chart", style={"height": "100%"})
+                                        ],
+                                        style={
+                                            "padding": "10px",
+                                            "height": "50%",
+                                            "margin-top": "15px",
+                                            "backgroundColor": "white",
+                                            "border-radius": "8px",
+                                            "box-shadow": "0 2px 6px rgba(0,0,0,0.1)"
+                                        }
+                                    ),
+
+                                ],
+                                width=7,
+                                style={"padding": "10px", "height": "700px"}
                             ),
 
-                            # Pie chart à droite
                             dbc.Col(
                                 html.Div(
                                     [
-                                        dcc.Graph(id="pie_chart", style={"height": "100%"})
+                                        dcc.Graph(id="bar_chart", style={"height": "100%"})
                                     ],
                                     style={
                                         "padding": "10px",
-                                        "height": "350px",
+                                        "height": "700px",
                                         "backgroundColor": "white",
                                         "border-radius": "8px",
                                         "box-shadow": "0 2px 6px rgba(0,0,0,0.1)"
                                     }
                                 ),
-                                width=6,
+                                width=5,
                                 style={"padding": "10px"}
                             ),
 
                         ],
-                        style={"margin": "0"}
-                    ),
-
-                    # ---------- LIGNE 3 : BARPLOT SUR TOUTE LA LARGEUR ----------
-                    dbc.Row(
-                        dbc.Col(
-                            html.Div(
-                                [
-                                    dcc.Graph(id="bar_chart", style={"height": "100%"})
-                                ],
-                                style={
-                                    "padding": "10px",
-                                    "height": "350px",
-                                    "backgroundColor": "white",
-                                    "border-radius": "8px",
-                                    "box-shadow": "0 2px 6px rgba(0,0,0,0.1)"
-                                }
-                            ),
-                            width=12,
-                            style={"padding": "10px"}
-                        ),
                         style={"margin": "0"}
                     ),
 
@@ -571,4 +582,3 @@ def update_dashboard(gender, city):
 
 if __name__ == "__main__":
     app.run(debug=True, port=8050, jupyter_mode="external")
-
