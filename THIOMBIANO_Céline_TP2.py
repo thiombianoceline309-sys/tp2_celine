@@ -272,7 +272,6 @@ from dash import html, dcc
 import dash_bootstrap_components as dbc
 from dash.dependencies import Input, Output, State
 
-
 # Palette de couleurs
 PRIMARY = "#1f77b4"
 LIGHT = "#4fa3d1"
@@ -281,7 +280,6 @@ TEXT = "#f7f7f7"
 
 app = dash.Dash(__name__, external_stylesheets=[dbc.themes.FLATLY])
 server = app.server
-
 
 app.layout = dbc.Container(
     style={
@@ -321,6 +319,7 @@ app.layout = dbc.Container(
                         style={"font-size": "14px"}
                     ),
 
+                    # ⭐ BLOC LOGO — FOND ÉCLAIRCI
                     html.Div(
                         [
                             html.Img(
@@ -335,7 +334,7 @@ app.layout = dbc.Container(
                         ],
                         style={
                             "padding": "20px",
-                            "backgroundColor": "#2C3E50",
+                            "backgroundColor": "#C5DAEF",   
                             "border-radius": "8px",
                             "box-shadow": "0 2px 6px rgba(0,0,0,0.2)"
                         }
@@ -565,8 +564,4 @@ def update_dashboard(gender, city):
 
 
 if __name__ == "__main__":
-    app.run(debug=True)
-
-
-
-
+    app.run(debug=True, port=8050, jupyter_mode="external")
