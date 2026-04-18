@@ -120,8 +120,8 @@ def plot_bar_nombre_achats(df):
 
     fig = px.bar(
         dfg,
-        y="Product line",
-        x="Invoice ID",
+        x="Product line",
+        y="Invoice ID",
         color="Customer type",
         barmode="group",
         title="Nombre total d'achats",
@@ -319,7 +319,6 @@ app.layout = dbc.Container(
                         style={"font-size": "14px"}
                     ),
 
-                    
                     html.Div(
                         [
                             html.Img(
@@ -334,7 +333,7 @@ app.layout = dbc.Container(
                         ],
                         style={
                             "padding": "20px",
-                            "backgroundColor": "#C5DAEF",   
+                            "backgroundColor": "#C5DAEF",
                             "border-radius": "8px",
                             "box-shadow": "0 2px 6px rgba(0,0,0,0.2)"
                         }
@@ -394,6 +393,7 @@ app.layout = dbc.Container(
             dbc.Col(
                 [
 
+                    # ---------- LIGNE 1 : KPI ----------
                     dbc.Row(
                         [
 
@@ -455,62 +455,68 @@ app.layout = dbc.Container(
                         style={"margin": "0"}
                     ),
 
+                    # ---------- LIGNE 2 : EVOLUTION + PIE ----------
                     dbc.Row(
                         [
 
-                            dbc.Col(
-                                [
-
-                                    html.Div(
-                                        [
-                                            dcc.Graph(id="evolution_chart", style={"height": "100%"})
-                                        ],
-                                        style={
-                                            "padding": "10px",
-                                            "height": "50%",
-                                            "backgroundColor": "white",
-                                            "border-radius": "8px",
-                                            "box-shadow": "0 2px 6px rgba(0,0,0,0.1)"
-                                        }
-                                    ),
-
-                                    html.Div(
-                                        [
-                                            dcc.Graph(id="pie_chart", style={"height": "100%"})
-                                        ],
-                                        style={
-                                            "padding": "10px",
-                                            "height": "50%",
-                                            "margin-top": "15px",
-                                            "backgroundColor": "white",
-                                            "border-radius": "8px",
-                                            "box-shadow": "0 2px 6px rgba(0,0,0,0.1)"
-                                        }
-                                    ),
-
-                                ],
-                                width=7,
-                                style={"padding": "10px", "height": "700px"}
-                            ),
-
+                            # Évolution hebdo à gauche
                             dbc.Col(
                                 html.Div(
                                     [
-                                        dcc.Graph(id="bar_chart", style={"height": "100%"})
+                                        dcc.Graph(id="evolution_chart", style={"height": "100%"})
                                     ],
                                     style={
                                         "padding": "10px",
-                                        "height": "700px",
+                                        "height": "350px",
                                         "backgroundColor": "white",
                                         "border-radius": "8px",
                                         "box-shadow": "0 2px 6px rgba(0,0,0,0.1)"
                                     }
                                 ),
-                                width=5,
+                                width=6,
+                                style={"padding": "10px"}
+                            ),
+
+                            # Pie chart à droite
+                            dbc.Col(
+                                html.Div(
+                                    [
+                                        dcc.Graph(id="pie_chart", style={"height": "100%"})
+                                    ],
+                                    style={
+                                        "padding": "10px",
+                                        "height": "350px",
+                                        "backgroundColor": "white",
+                                        "border-radius": "8px",
+                                        "box-shadow": "0 2px 6px rgba(0,0,0,0.1)"
+                                    }
+                                ),
+                                width=6,
                                 style={"padding": "10px"}
                             ),
 
                         ],
+                        style={"margin": "0"}
+                    ),
+
+                    # ---------- LIGNE 3 : BARPLOT SUR TOUTE LA LARGEUR ----------
+                    dbc.Row(
+                        dbc.Col(
+                            html.Div(
+                                [
+                                    dcc.Graph(id="bar_chart", style={"height": "100%"})
+                                ],
+                                style={
+                                    "padding": "10px",
+                                    "height": "350px",
+                                    "backgroundColor": "white",
+                                    "border-radius": "8px",
+                                    "box-shadow": "0 2px 6px rgba(0,0,0,0.1)"
+                                }
+                            ),
+                            width=12,
+                            style={"padding": "10px"}
+                        ),
                         style={"margin": "0"}
                     ),
 
@@ -565,3 +571,4 @@ def update_dashboard(gender, city):
 
 if __name__ == "__main__":
     app.run(debug=True, port=8050, jupyter_mode="external")
+
