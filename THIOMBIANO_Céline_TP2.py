@@ -133,23 +133,23 @@ def plot_bar_nombre_achats(df):
     fig.update_layout(
         autosize=True,
 
-        # ↑ marge haute suffisante pour titre + légende
+        # marge haute pour titre + légende
         margin=dict(l=5, r=5, t=95, b=10),
 
         yaxis=dict(tickfont=dict(size=8)),
         bargap=0.10,
         bargroupgap=0.02,
 
-        # ⭐ TITRE LÉGÈREMENT À GAUCHE (pas centré)
+        
         title_x=0.25,
 
-        # ⭐ LÉGENDE À DROITE, bien séparée du graphe
+        
         legend=dict(
             orientation="h",
             yanchor="top",
-            y=1.07,          # ← juste sous le titre, mais plus haut qu’avant
-            xanchor="right",
-            x=1.0,           # ← alignée à droite
+            y=1.07,          # juste sous le titre
+            xanchor="left",
+            x=0.0,           # ← alignée à gauche
             font=dict(size=9),
             bgcolor="rgba(0,0,0,0)",
             itemwidth=60
@@ -166,6 +166,7 @@ def plot_bar_nombre_achats(df):
 
     return fig
 plot_bar_nombre_achats(df).show()
+
 
 # %% [markdown]
 # ### 3. Diagramme circulaire montrant la répartition de la catégorie de produit (Product line)
@@ -243,17 +244,19 @@ def graph_evolution_hebdo(df):
 
     fig.update_layout(
         autosize=True,
-        width=None,              # ⭐ autorise l’extension horizontale
-        margin=dict(l=0, r=0, t=105, b=20),
+        width=None,
 
-        # ⭐ titre légèrement à gauche
-        title_x=0.25,
+        
+        margin=dict(l=0, r=10, t=105, b=20),
 
-        # ⭐ légende à droite, propre
+        # titre légèrement à gauche
+        title_x=0.15,
+
+        # légende à droite
         legend=dict(
             orientation="h",
             yanchor="top",
-            y=1.15,
+            y=1.10,
             xanchor="right",
             x=1.0,
             font=dict(size=9),
