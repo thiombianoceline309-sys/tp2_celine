@@ -345,15 +345,15 @@ app.layout = dbc.Container(
                                 style={
                                     "display": "block",
                                     "margin": "auto",
-                                    "height": "300px",
-                                    "margin-top": "10px"
+                                    "height": "200px",
+                                    "margin-top": "5px"
                                 }
                             )
                         ],
                         style={
-                            "padding": "20px",
-                            "backgroundColor": "#C5DAEF",   
-                            "border-radius": "8px",
+                            "padding": "10px", 
+                            "backgroundColor": "#707F8E",   
+                            "border-radius": "8px", 
                             "box-shadow": "0 2px 6px rgba(0,0,0,0.2)"
                         }
                     ),
@@ -401,7 +401,7 @@ app.layout = dbc.Container(
                     ),
 
                 ],
-                width=3,
+                width=2,
                 style={
                     "padding": "0",
                     "backgroundColor": "#2C3E50"
@@ -507,7 +507,7 @@ app.layout = dbc.Container(
                                     ),
 
                                 ],
-                                width=7,
+                                width=6,
                                 style={"padding": "10px", "height": "700px"}
                             ),
 
@@ -524,7 +524,7 @@ app.layout = dbc.Container(
                                         "box-shadow": "0 2px 6px rgba(0,0,0,0.1)"
                                     }
                                 ),
-                                width=5,
+                                width=6,
                                 style={"padding": "10px"}
                             ),
 
@@ -533,7 +533,7 @@ app.layout = dbc.Container(
                     ),
 
                 ],
-                width=9,
+                width=10,
                 style={
                     "padding": "0",
                     "backgroundColor": "#2C3E50"
