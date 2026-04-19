@@ -136,7 +136,7 @@ def plot_bar_nombre_achats(df):
         # marge haute pour titre + légende
         margin=dict(l=5, r=5, t=95, b=10),
 
-        yaxis=dict(tickfont=dict(size=8)),
+        yaxis=dict(tickfont=dict(size=7)),
         bargap=0.10,
         bargroupgap=0.02,
 
@@ -147,12 +147,12 @@ def plot_bar_nombre_achats(df):
         legend=dict(
             orientation="h",
             yanchor="top",
-            y=1.07,          # juste sous le titre
+            y=1.068,          # juste sous le titre
             xanchor="left",
-            x=0.0,           # ← alignée à gauche
-            font=dict(size=9),
+            x=0.0,           # alignée à gauche
+            font=dict(size=7),
             bgcolor="rgba(0,0,0,0)",
-            itemwidth=60
+            itemwidth=30
         ),
 
         # Thème
@@ -245,9 +245,7 @@ def graph_evolution_hebdo(df):
     fig.update_layout(
         autosize=True,
         width=None,
-
-        
-        margin=dict(l=0, r=10, t=105, b=20),
+        margin=dict(l=0, r=5, t=105, b=20),
 
         # titre légèrement à gauche
         title_x=0.15,
@@ -256,12 +254,12 @@ def graph_evolution_hebdo(df):
         legend=dict(
             orientation="h",
             yanchor="top",
-            y=1.10,
+            y=1.18,
             xanchor="right",
             x=1.0,
-            font=dict(size=9),
+            font=dict(size=8),
             bgcolor="rgba(0,0,0,0)",
-            itemwidth=60
+            itemwidth=30
         ),
 
         paper_bgcolor="#2C3E50",
