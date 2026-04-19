@@ -507,7 +507,7 @@ app.layout = dbc.Container(
                                     ),
 
                                 ],
-                                width=6,
+                                width=7,
                                 style={"padding": "10px", "height": "700px"}
                             ),
 
@@ -524,7 +524,7 @@ app.layout = dbc.Container(
                                         "box-shadow": "0 2px 6px rgba(0,0,0,0.1)"
                                     }
                                 ),
-                                width=6,
+                                width=5,
                                 style={"padding": "10px"}
                             ),
 
@@ -582,4 +582,4 @@ def update_dashboard(gender, city):
 
 
 if __name__ == "__main__":
-    app.run(debug=True, port=8050, jupyter_mode="external")
+    app.run(debug=True, port=8052, jupyter_mode="external")
